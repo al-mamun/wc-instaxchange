@@ -1,0 +1,11 @@
+# Exclude system files and development artifacts
+.DS_Store
+node_modules/
+vendor/
+*.log
+*.zip
+*.tar.gz
+*.env
+.idea/
+.vscode/
+__MACOSX/

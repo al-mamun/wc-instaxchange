@@ -1,0 +1,319 @@
+/* InstaxChange Payment Gateway Frontend Styles */
+
+#instaxchange-payment-container {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f9fafb;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+#instaxchange-payment-container h3 {
+  margin: 0 0 15px 0;
+  color: #1a202c;
+  font-size: 1.3em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+#instaxchange-payment-container h3::before {
+  content: "🔐";
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+#instaxchange-payment-container p {
+  margin: 0 0 15px 0;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+#instaxchange-iframe-container {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: 600px;
+  border: 2px solid #e2e8f0;
+}
+
+#instaxchange-iframe-container.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loading-text {
+  color: #6b7280;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.loading-text::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Payment method selection styles */
+.payment_method_instaxchange {
+  position: relative;
+}
+
+.payment_method_instaxchange label {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.payment_method_instaxchange label img {
+  margin-left: 10px;
+  max-height: 24px;
+  border-radius: 4px;
+}
+
+.payment_method_instaxchange .payment_box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment_method_instaxchange .payment_box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+  pointer-events: none;
+}
+
+.payment_method_instaxchange .payment_box p {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Iframe responsive styling */
+#instaxchange-iframe-container iframe {
+  width: 100% !important;
+  height: 600px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: white;
+}
+
+/* Error states */
+.woocommerce-error {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 20px 0;
+  color: #722;
+}
+
+.woocommerce-error h3 {
+  margin-top: 0;
+  color: #a00;
+}
+
+.woocommerce-error ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.woocommerce-error .button {
+  background: #0073aa;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* Success states */
+.woocommerce-message {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+/* Progress indicator */
+.instaxchange-progress {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.instaxchange-progress-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.instaxchange-progress-step::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background: #e9ecef;
+  z-index: 1;
+}
+
+.instaxchange-progress-step:last-child::after {
+  display: none;
+}
+
+.instaxchange-progress-step.active {
+  color: #0073aa;
+  font-weight: 600;
+}
+
+.instaxchange-progress-step.active::after {
+  background: #0073aa;
+}
+
+li.wc_payment_method.payment_method_instaxchange label img {
+  margin-left: 20px;
+  max-width: 100px;
+}
+
+.woocommerce-page .woocommerce-checkout,
+.woocommerce-page.woocommerce-order-pay {
+  display: block;
+}
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  #instaxchange-payment-container {
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  #instaxchange-iframe-container {
+    min-height: 500px;
+    border-radius: 8px;
+  }
+
+  #instaxchange-iframe-container iframe {
+    height: 500px !important;
+  }
+
+  .payment_method_instaxchange .payment_box {
+    padding: 15px;
+  }
+
+  #instaxchange-payment-container h3 {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  #instaxchange-payment-container {
+    margin: 10px 0;
+    padding: 12px;
+  }
+
+  #instaxchange-iframe-container {
+    min-height: 450px;
+  }
+
+  #instaxchange-iframe-container iframe {
+    height: 450px !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  #instaxchange-payment-container {
+    background: #1a202c;
+    border-color: #2d3748;
+    color: #e2e8f0;
+  }
+
+  #instaxchange-payment-container h3 {
+    color: #f7fafc;
+  }
+
+  #instaxchange-payment-container p {
+    color: #a0aec0;
+  }
+
+  #instaxchange-iframe-container {
+    border-color: #4a5568;
+  }
+
+  .loading-text {
+    color: #a0aec0;
+  }
+}
+
+/* Focus and accessibility */
+.payment_method_instaxchange input[type="radio"]:focus + label {
+  outline: 2px solid #0073aa;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  #instaxchange-payment-container {
+    border: 2px solid #000;
+  }
+
+  .payment_method_instaxchange .payment_box {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .loading-text::after {
+    animation: none;
+  }
+
+  .payment_method_instaxchange .payment_box::before {
+    display: none;
+  }
+}
