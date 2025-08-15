@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: WooCommerce InstaxChange Gateway
- * Plugin URI: https://imamundevstudios.com/plugins/wc-instaxchange
+ * Plugin URI: https://mamundevstudios.com/plugins/wc-instaxchange
  * Description: Accept cryptocurrency payments via InstaxChange payment gateway
  * Version: 1.0.4
  * Author: Md. Abdullah Al Mamun
- * Author URI: https://imamundevstudios.com/
+ * Author URI: https://mamundevstudios.com/
  * Contributors: al-mamun
  * Requires at least: 5.0
  * Tested up to: 6.4
