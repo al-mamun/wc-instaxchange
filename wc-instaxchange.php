@@ -1,20 +1,22 @@
 <?php
 /**
  * Plugin Name: WooCommerce InstaxChange Gateway
- * Plugin URI: https://instaxchange.com/
+ * Plugin URI: https://imamundevstudios.com/plugins/wc-instaxchange
  * Description: Accept cryptocurrency payments via InstaxChange payment gateway
  * Version: 1.0.4
- * Author: InstaxChange
- * Author URI: https://instaxchange.com/
- * Text Domain: wc-instaxchange
- * Domain Path: /languages
+ * Author: Md. Abdullah Al Mamun
+ * Author URI: https://imamundevstudios.com/
+ * Contributors: al-mamun
  * Requires at least: 5.0
  * Tested up to: 6.4
  * WC requires at least: 5.0
  * WC tested up to: 8.2
+ * Text Domain: wc-instaxchange
+ * Domain Path: /languages
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
+
 
 // Prevent direct access
 if (!defined('ABSPATH')) {
@@ -382,5 +384,3 @@ class WC_InstaxChange_Plugin
 
 // Initialize the plugin
 new WC_InstaxChange_Plugin();
-
-?>
