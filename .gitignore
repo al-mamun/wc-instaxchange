@@ -12,12 +12,20 @@ Thumbs.db
 # Claude Code
 .claude/
 
+# Setup files (not needed in repository)
+.mailmap
+FRESH_REPO_SETUP.md
+QUICK_START.md
+START_HERE.txt
+fresh-repo-setup.bat
+fresh-repo-setup.sh
+
 # Node modules
 node_modules/
 npm-debug.log
 yarn-error.log
 
-# Build files
+# Build/Distribution files
 *.zip
 build/
 dist/
