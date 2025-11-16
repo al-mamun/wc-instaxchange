@@ -1,0 +1,177 @@
+/* InstaxChange Theme Compatibility Overrides */
+/* These styles use !important to override theme-specific CSS */
+
+/* Force visibility for theme compatibility */
+.instaxchange-payment-page,
+.instaxchange-container,
+.instaxchange-payment-wrapper,
+.instaxchange-payment-section,
+.method-btn,
+.payment-interface-container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Override common theme hiding styles */
+.woocommerce-checkout .instaxchange-payment-page {
+  display: block !important;
+}
+
+/* Ensure payment methods are visible */
+.method-categories,
+.method-category,
+.method-buttons,
+.method-btn {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Force gateway visibility in checkout */
+.woocommerce-checkout .payment_method_instaxchange,
+.woocommerce-checkout .wc_payment_methods li.payment_method_instaxchange {
+  display: list-item !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  height: auto !important;
+  width: 100% !important;
+  margin: 0 0 1em 0 !important;
+  padding: 1em !important;
+  background: #fff !important;
+  border: 1px solid #e9ecef !important;
+  border-radius: 4px !important;
+}
+
+/* Force radio button visibility */
+.payment_method_instaxchange input[type="radio"],
+.wc_payment_methods li.payment_method_instaxchange input[type="radio"] {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 5px 0 0 !important;
+}
+
+/* Force label visibility */
+.payment_method_instaxchange label,
+.wc_payment_methods li.payment_method_instaxchange label {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  cursor: pointer !important;
+}
+
+/* Override any theme styles that might hide payment boxes */
+.payment_method_instaxchange .payment_box,
+.wc_payment_methods li.payment_method_instaxchange .payment_box {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  height: auto !important;
+  padding: 1em !important;
+  background: #f8f9fa !important;
+  border: 1px solid #e9ecef !important;
+}
+
+/* Force the entire payment methods list to be visible */
+.wc_payment_methods,
+.wc_payment_methods li {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  height: auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* Ultra-aggressive gateway visibility overrides */
+.payment_method_instaxchange,
+.payment_method_instaxchange *,
+.wc_payment_methods li.payment_method_instaxchange,
+.wc_payment_methods li.payment_method_instaxchange * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  height: auto !important;
+  width: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  z-index: 9999 !important;
+}
+
+/* Override any JavaScript-added hide styles */
+.payment_method_instaxchange[style*="display: none"],
+.payment_method_instaxchange[style*="visibility: hidden"],
+.payment_method_instaxchange[style*="opacity: 0"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Force show even if hidden by inline styles */
+.wc_payment_methods li[style*="display: none"] .payment_method_instaxchange,
+.wc_payment_methods
+  li[style*="visibility: hidden"]
+  .payment_method_instaxchange {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Specific overrides for checkout page */
+body.woocommerce-checkout .payment_method_instaxchange,
+body.woocommerce-checkout .wc_payment_methods li.payment_method_instaxchange {
+  display: list-item !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  height: auto !important;
+  width: 100% !important;
+  margin: 0 0 1em 0 !important;
+  padding: 1em !important;
+  background: #fff !important;
+  border: 1px solid #e9ecef !important;
+  border-radius: 4px !important;
+}
+
+/* Override any theme styles that might hide the entire payment section */
+.woocommerce-checkout-payment,
+.woocommerce-checkout-payment * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Specific overrides for popular themes */
+.theme-avada .payment_method_instaxchange,
+.theme-divi .payment_method_instaxchange,
+.theme-enfold .payment_method_instaxchange,
+.theme-x .payment_method_instaxchange,
+.theme-flatsome .payment_method_instaxchange,
+.theme-woodmart .payment_method_instaxchange,
+.theme-astra .payment_method_instaxchange,
+.theme-generatepress .payment_method_instaxchange,
+.theme-oceanwp .payment_method_instaxchange {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure iframe is always visible */
+#instaxchange-payment-iframe {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
