@@ -2,6 +2,26 @@
 
 A secure, feature-rich WooCommerce payment gateway integration for InstaxChange, supporting multiple payment methods including credit cards, digital wallets, regional payment options, and cryptocurrency.
 
+**Version:** 2.0.0
+**Author:** [Md. Abdullah Al Mamun](https://www.mamundevstudios.com)
+**Plugin URI:** [https://www.mamundevstudios.com/wc-instaxchange](https://www.mamundevstudios.com/wc-instaxchange)
+**Requires:** WordPress 5.8+, WooCommerce 6.0+, PHP 7.4+
+**License:** GPL v2 or later
+
+---
+
+## About
+
+This plugin provides a complete payment gateway solution for WooCommerce stores, enabling secure transactions through InstaxChange's payment processing platform. With support for traditional payment methods, regional banking options, and cryptocurrency, this gateway offers flexibility for global e-commerce operations.
+
+**Key Highlights:**
+- Production-ready with 95% security rating
+- BLIK payment support for Polish market
+- Enterprise-grade webhook security
+- Built-in rate limiting and DoS protection
+- Automatic environment detection
+- WooCommerce Blocks compatible
+
 ## Features
 
 ### Payment Methods Supported

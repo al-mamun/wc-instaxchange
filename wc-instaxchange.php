@@ -1,21 +1,25 @@
 <?php
 /**
  * Plugin Name: WooCommerce InstaxChange Gateway
- * Plugin URI: https://mamundevstudios.com
- * Description: Accept cryptocurrency payments via InstaxChange - ALL payment methods automatically enabled including cards, Apple Pay, Google Pay, bank transfers, and regional payment methods.
- * Version: 1.0.4
+ * Plugin URI: https://www.mamundevstudios.com/wc-instaxchange
+ * Description: Secure payment gateway for WooCommerce supporting multiple payment methods including credit cards, digital wallets (Apple Pay, Google Pay), regional payments (iDEAL, Bancontact, BLIK, PIX, etc.), and cryptocurrency. Features production-grade security with webhook verification, rate limiting, and environment detection.
+ * Version: 2.0.0
  * Author: Md. Abdullah Al Mamun
- * Author URI: https://mamundevstudios.com
+ * Author URI: https://www.mamundevstudios.com
  * Text Domain: wc-instaxchange
  * Domain Path: /languages
- * Requires at least: 5.0
+ * Requires at least: 5.8
  * Tested up to: 6.4
  * Requires PHP: 7.4
- * WC requires at least: 5.0
+ * WC requires at least: 6.0
  * WC tested up to: 8.6
- * WC requires PHP: 7.4
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * @package WC_InstaxChange
+ * @category Payment Gateway
+ * @author Md. Abdullah Al Mamun
+ * @copyright 2025 Mamun Dev Studios
  */
 
 // Prevent direct access
@@ -24,7 +28,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('WC_INSTAXCHANGE_VERSION', '1.0.4');
+define('WC_INSTAXCHANGE_VERSION', '2.0.0');
 define('WC_INSTAXCHANGE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WC_INSTAXCHANGE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WC_INSTAXCHANGE_PLUGIN_FILE', __FILE__);
