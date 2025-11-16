@@ -1141,7 +1141,7 @@ class WC_InstaxChange_Gateway extends WC_Payment_Gateway
 
         echo '<p><strong>Gateway Enabled:</strong> ' . ($this->enabled === 'yes' ? '✅ Yes' : '❌ No') . '</p>';
         echo '<p><strong>Test Mode:</strong> ' . ($this->testmode === 'yes' ? '✅ Yes' : '❌ No') . '</p>';
-        echo '<p><strong>Environment:</strong> ' . (defined('WC_INSTAXCHANGE_PRODUCTION') && WC_INSTAXCHANGE_PRODUCTION ? '🔴 Production' : '🟡 Development') . '</p>';
+        echo '<p><strong>Environment:</strong> ' . (defined('WC_INSTAXCHANGE_PRODUCTION') && WC_INSTAXCHANGE_PRODUCTION ? '🟢 Production' : '🟡 Development') . '</p>';
         echo '<p><strong>Available:</strong> ' . ($this->is_available() ? '✅ Yes' : '❌ No') . '</p>';
         echo '<p><strong>Configuration Valid:</strong> ' . ($is_valid ? '✅ Yes' : '❌ No') . '</p>';
 

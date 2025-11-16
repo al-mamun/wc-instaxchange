@@ -171,7 +171,7 @@ Rate limiting uses WordPress transients with IP/user-based tracking.
 
 1. **Environment Configuration**
    - Remove or set `WC_INSTAXCHANGE_DEBUG` to `false`
-   - Verify production mode indicator shows 🔴 in admin panel
+   - Verify production mode indicator shows 🟢 in admin panel
 
 2. **Webhook Configuration**
    - Generate strong webhook secret (32+ characters)
