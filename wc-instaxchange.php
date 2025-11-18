@@ -82,28 +82,10 @@ function wc_instaxchange_debug_log($message, $data = null)
 }
 
 /**
- * Fix WooCommerce Blocks customer session initialization issue
- * This ensures customer object is available before StoreAPI processes checkout
+ * WooCommerce Blocks handles session initialization on its own
+ * We don't need to manually initialize it - removing problematic code
+ * The Blocks integration in class-instaxchange-blocks.php handles everything
  */
-add_action('woocommerce_loaded', function() {
-    // Hook into StoreAPI initialization with proper dependency checks
-    add_action('rest_api_init', function() {
-        // Only initialize if WooCommerce functions are available
-        if (!function_exists('wc_get_cart_item_data_hash')) {
-            return; // WooCommerce not ready yet
-        }
-
-        if (is_null(WC()->customer)) {
-            try {
-                WC()->initialize_session();
-                WC()->initialize_cart();
-                wc_instaxchange_debug_log('Initialized WC customer session for StoreAPI');
-            } catch (Exception $e) {
-                wc_instaxchange_log('Failed to initialize WC session: ' . $e->getMessage(), null, 'error');
-            }
-        }
-    }, 15); // Run after WooCommerce core initialization
-});
 
 /**
  * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
