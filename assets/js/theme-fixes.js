@@ -136,16 +136,16 @@
                     }
 
                     if (container && container.length > 0) {
-                        var gatewayHtml = "<li class=\"wc_payment_method payment_method_instaxchange\" style=\"display: block !important; visibility: visible !important; opacity: 1 !important;\">" +
-                            "<input id=\"payment_method_instaxchange\" type=\"radio\" class=\"input-radio\" name=\"payment_method\" value=\"instaxchange\" style=\"display: inline-block !important;\">" +
-                            "<label for=\"payment_method_instaxchange\" style=\"display: block !important;\">" +
-                                "<strong>🔒 Pay with InstaxChange - All Methods Available</strong><br>" +
-                                "<small>Secure payments with credit/debit cards, digital wallets, bank transfers, and cryptocurrency.</small>" +
-                            "</label>" +
-                            "<div class=\"payment_box payment_method_instaxchange\" style=\"display: none;\">" +
-                                "<p>Experience seamless payments with InstaxChange - supporting all major payment methods worldwide.</p>" +
-                            "</div>" +
-                        "</li>";
+                        var gatewayHtml = '<li class="wc_payment_method payment_method_instaxchange" style="display: block !important; visibility: visible !important; opacity: 1 !important;">' +
+                            '<input id="payment_method_instaxchange" type="radio" class="input-radio" name="payment_method" value="instaxchange" style="display: inline-block !important;">' +
+                            '<label for="payment_method_instaxchange" style="display: block !important;">' +
+                                '<strong>🔒 Pay with InstaxChange - All Methods Available</strong><br>' +
+                                '<small>Secure payments with credit/debit cards, digital wallets, bank transfers, and cryptocurrency.</small>' +
+                            '</label>' +
+                            '<div class="payment_box payment_method_instaxchange" style="display: none;">' +
+                                '<p>Experience seamless payments with InstaxChange - supporting all major payment methods worldwide.</p>' +
+                            '</div>' +
+                        '</li>';
 
                         container.append(gatewayHtml);
                         console.log("InstaxChange: Gateway injected successfully");
@@ -178,21 +178,21 @@
                         console.log("InstaxChange: Could not find container to inject into, trying emergency injection");
 
                         // Emergency injection: find any form element and inject after it
-                        var checkoutForm = $("form.checkout, form[name=\"checkout\"], .woocommerce-checkout form").first();
+                        var checkoutForm = $('form.checkout, form[name="checkout"], .woocommerce-checkout form').first();
                         if (checkoutForm.length > 0) {
                             // Create a payment methods section
-                            var emergencyContainer = "<div class=\"woocommerce-checkout-payment\" style=\"margin-top: 20px;\">" +
-                                "<h3>Payment Method</h3>" +
-                                "<ul class=\"wc_payment_methods payment_methods\">" +
-                                    "<li class=\"wc_payment_method payment_method_instaxchange\" style=\"display: block !important;\">" +
-                                        "<input id=\"payment_method_instaxchange\" type=\"radio\" class=\"input-radio\" name=\"payment_method\" value=\"instaxchange\" checked=\"checked\" style=\"display: inline-block !important;\">" +
-                                        "<label for=\"payment_method_instaxchange\" style=\"display: block !important;\">" +
-                                            "<strong>🔒 Pay with InstaxChange - All Methods Available</strong><br>" +
-                                            "<small>Secure payments with credit/debit cards, digital wallets, bank transfers, and cryptocurrency.</small>" +
-                                        "</label>" +
-                                    "</li>" +
-                                "</ul>" +
-                            "</div>";
+                            var emergencyContainer = '<div class="woocommerce-checkout-payment" style="margin-top: 20px;">' +
+                                '<h3>Payment Method</h3>' +
+                                '<ul class="wc_payment_methods payment_methods">' +
+                                    '<li class="wc_payment_method payment_method_instaxchange" style="display: block !important;">' +
+                                        '<input id="payment_method_instaxchange" type="radio" class="input-radio" name="payment_method" value="instaxchange" checked="checked" style="display: inline-block !important;">' +
+                                        '<label for="payment_method_instaxchange" style="display: block !important;">' +
+                                            '<strong>🔒 Pay with InstaxChange - All Methods Available</strong><br>' +
+                                            '<small>Secure payments with credit/debit cards, digital wallets, bank transfers, and cryptocurrency.</small>' +
+                                        '</label>' +
+                                    '</li>' +
+                                '</ul>' +
+                            '</div>';
 
                             checkoutForm.append(emergencyContainer);
                             console.log("InstaxChange: Emergency injection successful");

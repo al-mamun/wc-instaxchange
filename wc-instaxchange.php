@@ -90,21 +90,40 @@ function wc_instaxchange_debug_log($message, $data = null)
 /**
  * Force enable guest checkout - override theme/plugin restrictions
  */
-add_filter('pre_option_woocommerce_enable_guest_checkout', function($value) {
-    return 'yes';
-});
-
+add_filter('pre_option_woocommerce_enable_guest_checkout', '__return_true', 999);
+add_filter('option_woocommerce_enable_guest_checkout', '__return_true', 999);
 add_filter('woocommerce_checkout_registration_required', '__return_false', 999);
+add_filter('woocommerce_enable_guest_checkout', '__return_true', 999);
 
 /**
- * Prevent redirect to login on checkout page
+ * Remove any auth requirements on checkout page
+ */
+add_action('wp', function() {
+    if (is_checkout()) {
+        // Remove all authentication requirements
+        remove_all_actions('wp_authenticate');
+        remove_all_filters('authenticate');
+
+        // Ensure guest checkout is forced
+        add_filter('woocommerce_checkout_registration_required', '__return_false', 9999);
+        add_filter('pre_option_woocommerce_enable_guest_checkout', '__return_true', 9999);
+    }
+}, 1);
+
+/**
+ * Prevent any redirects from checkout page for guests
  */
 add_action('template_redirect', function() {
     if (is_checkout() && !is_user_logged_in()) {
-        // Force allow access to checkout for guests
-        remove_all_filters('template_redirect', 10);
+        // Don't redirect guests from checkout
+        remove_action('template_redirect', 'wp_redirect_admin_locations', 1000);
+
+        // Force WooCommerce to allow guest checkout
+        if (class_exists('WC')) {
+            WC()->session->set('reload_checkout', true);
+        }
     }
-}, 1);
+}, 5);
 
 /**
  * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
