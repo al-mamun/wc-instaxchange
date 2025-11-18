@@ -93,45 +93,45 @@
     // Force inject InstaxChange gateway directly into DOM
     var injectionScript = `
             jQuery(document).ready(function($) {
-                console.log("InstaxChange: Starting aggressive gateway injection...");
+                console.log('InstaxChange: Starting aggressive gateway injection...');
 
                 function injectInstaxChangeGateway() {
-                    console.log("InstaxChange: Attempting gateway injection...");
+                    console.log('InstaxChange: Attempting gateway injection...');
 
                     // Check if already exists
-                    if ($("input[name=\"payment_method\"][value=\"instaxchange\"]").length > 0) {
-                        console.log("InstaxChange: Gateway already exists in DOM");
+                    if ($('input[name="payment_method"][value="instaxchange"]').length > 0) {
+                        console.log('InstaxChange: Gateway already exists in DOM');
                         return;
                     }
 
                     // Find payment methods container - try multiple selectors
                     var containers = [
-                        ".woocommerce-checkout-payment ul",
-                        ".wc_payment_methods",
-                        ".payment_methods",
-                        "#payment ul",
-                        "ul.payment_methods",
-                        ".checkout_payment ul",
-                        "[class*=\"payment\"][class*=\"method\"] ul"
+                        '.woocommerce-checkout-payment ul',
+                        '.wc_payment_methods',
+                        '.payment_methods',
+                        '#payment ul',
+                        'ul.payment_methods',
+                        '.checkout_payment ul',
+                        '[class*="payment"][class*="method"] ul'
                     ];
 
                     var container = null;
                     for (var i = 0; i < containers.length; i++) {
                         container = $(containers[i]);
                         if (container.length > 0) {
-                            console.log("InstaxChange: Found container with selector:", containers[i]);
+                            console.log('InstaxChange: Found container with selector:', containers[i]);
                             break;
                         }
                     }
 
                     if (!container || container.length === 0) {
-                        console.log("InstaxChange: No payment container found, trying fallback injection");
+                        console.log('InstaxChange: No payment container found, trying fallback injection');
 
                         // Fallback: inject after the last payment method
-                        var lastPaymentMethod = $(".woocommerce-checkout-payment li, .wc_payment_method, .payment_method").last();
+                        var lastPaymentMethod = $('.woocommerce-checkout-payment li, .wc_payment_method, .payment_method').last();
                         if (lastPaymentMethod.length > 0) {
                             container = lastPaymentMethod.parent();
-                            console.log("InstaxChange: Using fallback container");
+                            console.log('InstaxChange: Using fallback container');
                         }
                     }
 
@@ -148,34 +148,34 @@
                         '</li>';
 
                         container.append(gatewayHtml);
-                        console.log("InstaxChange: Gateway injected successfully");
+                        console.log('InstaxChange: Gateway injected successfully');
 
                         // Force visibility with aggressive CSS
                         setTimeout(function() {
-                            $("#payment_method_instaxchange").closest("li").css({
-                                "display": "block !important",
-                                "visibility": "visible !important",
-                                "opacity": "1 !important",
-                                "height": "auto !important",
-                                "overflow": "visible !important",
-                                "position": "relative !important",
-                                "z-index": "1 !important"
+                            $('#payment_method_instaxchange').closest('li').css({
+                                'display': 'block !important',
+                                'visibility': 'visible !important',
+                                'opacity': '1 !important',
+                                'height': 'auto !important',
+                                'overflow': 'visible !important',
+                                'position': 'relative !important',
+                                'z-index': '1 !important'
                             });
 
                             // Make sure the input is clickable
-                            $("#payment_method_instaxchange").css({
-                                "display": "inline-block !important",
-                                "visibility": "visible !important",
-                                "opacity": "1 !important",
-                                "pointer-events": "auto !important",
-                                "cursor": "pointer !important"
+                            $('#payment_method_instaxchange').css({
+                                'display': 'inline-block !important',
+                                'visibility': 'visible !important',
+                                'opacity': '1 !important',
+                                'pointer-events': 'auto !important',
+                                'cursor': 'pointer !important'
                             });
 
-                            console.log("InstaxChange: Gateway visibility forced");
+                            console.log('InstaxChange: Gateway visibility forced');
                         }, 100);
 
                     } else {
-                        console.log("InstaxChange: Could not find container to inject into, trying emergency injection");
+                        console.log('InstaxChange: Could not find container to inject into, trying emergency injection');
 
                         // Emergency injection: find any form element and inject after it
                         var checkoutForm = $('form.checkout, form[name="checkout"], .woocommerce-checkout form').first();
@@ -195,9 +195,9 @@
                             '</div>';
 
                             checkoutForm.append(emergencyContainer);
-                            console.log("InstaxChange: Emergency injection successful");
+                            console.log('InstaxChange: Emergency injection successful');
                         } else {
-                            console.log("InstaxChange: Emergency injection failed - no form found");
+                            console.log('InstaxChange: Emergency injection failed - no form found');
                         }
                     }
                 }
@@ -213,14 +213,14 @@
                 setTimeout(injectInstaxChangeGateway, 5000);
 
                 // Run on WooCommerce events
-                $(document.body).on("updated_checkout", function() {
-                    console.log("InstaxChange: Checkout updated, reinjecting");
+                $(document.body).on('updated_checkout', function() {
+                    console.log('InstaxChange: Checkout updated, reinjecting');
                     setTimeout(injectInstaxChangeGateway, 500);
                 });
 
                 // Run on page load
-                $(window).on("load", function() {
-                    console.log("InstaxChange: Page loaded, final injection");
+                $(window).on('load', function() {
+                    console.log('InstaxChange: Page loaded, final injection');
                     setTimeout(injectInstaxChangeGateway, 1000);
                 });
             });

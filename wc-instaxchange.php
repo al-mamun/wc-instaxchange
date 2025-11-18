@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce InstaxChange Gateway
  * Plugin URI: https://www.mamundevstudios.com/wc-instaxchange
  * Description: Secure payment gateway for WooCommerce supporting multiple payment methods including credit cards, digital wallets (Apple Pay, Google Pay), regional payments (iDEAL, Bancontact, BLIK, PIX, etc.), and cryptocurrency. Features production-grade security with webhook verification, rate limiting, and environment detection.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Md. Abdullah Al Mamun
  * Author URI: https://www.mamundevstudios.com
  * Text Domain: wc-instaxchange
