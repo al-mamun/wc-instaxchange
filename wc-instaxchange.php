@@ -88,6 +88,25 @@ function wc_instaxchange_debug_log($message, $data = null)
  */
 
 /**
+ * Force enable guest checkout - override theme/plugin restrictions
+ */
+add_filter('pre_option_woocommerce_enable_guest_checkout', function($value) {
+    return 'yes';
+});
+
+add_filter('woocommerce_checkout_registration_required', '__return_false', 999);
+
+/**
+ * Prevent redirect to login on checkout page
+ */
+add_action('template_redirect', function() {
+    if (is_checkout() && !is_user_logged_in()) {
+        // Force allow access to checkout for guests
+        remove_all_filters('template_redirect', 10);
+    }
+}, 1);
+
+/**
  * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
  */
 add_action('before_woocommerce_init', function () {
