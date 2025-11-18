@@ -82,6 +82,32 @@ function wc_instaxchange_debug_log($message, $data = null)
 }
 
 /**
+ * Fix WooCommerce Blocks customer session initialization issue
+ * This ensures customer object is available before StoreAPI processes checkout
+ */
+add_action('rest_api_init', function() {
+    if (is_null(WC()->customer)) {
+        WC()->initialize_session();
+        WC()->initialize_cart();
+        wc_instaxchange_debug_log('Initialized WC customer session for StoreAPI');
+    }
+}, 5);
+
+/**
+ * Ensure customer is loaded for StoreAPI requests
+ */
+add_filter('woocommerce_store_api_disable_nonce_check', function($disable) {
+    // Initialize customer if not already done
+    if (WC()->customer && is_null(WC()->customer->get_id())) {
+        if (is_user_logged_in()) {
+            WC()->customer->set_id(get_current_user_id());
+        }
+        wc_instaxchange_debug_log('Set customer ID for StoreAPI', WC()->customer->get_id());
+    }
+    return $disable;
+});
+
+/**
  * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
  */
 add_action('before_woocommerce_init', function () {
