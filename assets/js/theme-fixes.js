@@ -71,20 +71,24 @@
       return;
     }
 
-    // Debug: Log available gateways
-    var available_gateways = WC()
-      .payment_gateways()
-      .get_available_payment_gateways();
-    var registered_gateways = WC().payment_gateways().payment_gateways();
-    var debug_info = {
-      available_gateways: Object.keys(available_gateways),
-      registered_gateways: Object.keys(registered_gateways),
-      instaxchange_registered:
-        typeof registered_gateways["instaxchange"] !== "undefined",
-      instaxchange_available:
-        typeof available_gateways["instaxchange"] !== "undefined",
-    };
-    console.log("InstaxChange: Checkout page debug", debug_info);
+    // Debug: Log available gateways (only if WC is available)
+    if (typeof WC !== 'undefined' && typeof WC().payment_gateways === 'function') {
+      var available_gateways = WC()
+        .payment_gateways()
+        .get_available_payment_gateways();
+      var registered_gateways = WC().payment_gateways().payment_gateways();
+      var debug_info = {
+        available_gateways: Object.keys(available_gateways),
+        registered_gateways: Object.keys(registered_gateways),
+        instaxchange_registered:
+          typeof registered_gateways["instaxchange"] !== "undefined",
+        instaxchange_available:
+          typeof available_gateways["instaxchange"] !== "undefined",
+      };
+      console.log("InstaxChange: Checkout page debug", debug_info);
+    } else {
+      console.log("InstaxChange: WC object not available yet, skipping debug");
+    }
 
     // Force inject InstaxChange gateway directly into DOM
     var injectionScript = `
