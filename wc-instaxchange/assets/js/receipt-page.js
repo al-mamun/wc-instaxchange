@@ -427,11 +427,7 @@
    * Show fallback warning popup
    */
   function showFallbackWarningPopup(originalMethod, fallbackMethod) {
-    // Regional restrictions disabled - all payment methods available globally
-    console.log('InstaxChange: Payment method switching disabled - all methods available globally');
-    return; // Exit early - no restrictions
-
-    // Original code kept for reference but disabled
+    // Create modal overlay
     const modalOverlay = document.createElement("div");
     modalOverlay.className = "fallback-warning-modal-overlay";
     modalOverlay.innerHTML = `
@@ -441,8 +437,8 @@
           <h3>Payment Method Not Available</h3>
         </div>
         <div class="modal-content">
-          <p><strong>${originalMethod}</strong> payment method selected.</p>
-          <p>Processing with <strong>${fallbackMethod}</strong> for optimal payment experience.</p>
+          <p><strong>${originalMethod}</strong> is not available for your region or configuration.</p>
+          <p>We've automatically switched you to <strong>${fallbackMethod}</strong> for a smooth payment experience.</p>
         </div>
         <div class="modal-actions">
           <button type="button" class="modal-btn primary" onclick="dismissFallbackWarningModal()">Continue with ${fallbackMethod}</button>

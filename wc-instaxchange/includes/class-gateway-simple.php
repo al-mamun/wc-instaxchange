@@ -690,10 +690,6 @@ class WC_InstaxChange_Gateway extends WC_Payment_Gateway
                 'returnUrl' => $this->get_return_url($order), // URL to redirect after payment
                 'method' => $api_method, // Payment method mapped to InstaxChange format
                 'network' => ($this->default_crypto === 'USDC_POLYGON') ? 'polygon' : null, // Specify network for Polygon USDC
-                'requireAuth' => false, // Disable login requirement - allow guest payments
-                'guestCheckout' => true, // Enable guest checkout
-                'skipRegistration' => true, // Skip user registration
-                'directPayment' => true, // Direct payment to wallet without InstaxChange account
             );
 
             // Remove null network value if not needed
