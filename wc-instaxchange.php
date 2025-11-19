@@ -1019,6 +1019,136 @@ if (WC_INSTAXCHANGE_DEBUG) {
             echo '</div>';
         }
     });
+
+    /**
+     * Handle demo payment page requests (no login required)
+     */
+    add_action('woocommerce_api_wc_instaxchange_demo_payment', function() {
+        $order_id = isset($_GET['order_id']) ? absint($_GET['order_id']) : 0;
+        $session_id = isset($_GET['session_id']) ? sanitize_text_field($_GET['session_id']) : '';
+
+        $order = wc_get_order($order_id);
+
+        if (!$order) {
+            wp_die('Invalid order');
+        }
+
+        // Show demo payment page without InstaxChange login
+        ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Demo Payment - Order #<?php echo $order->get_order_number(); ?></title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f7fa; padding: 20px; }
+                .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+                .header { background: linear-gradient(135deg, #157ed2 0%, #0f5a9c 100%); color: white; padding: 30px; text-align: center; }
+                .header h1 { font-size: 24px; margin-bottom: 10px; }
+                .header p { opacity: 0.9; }
+                .content { padding: 30px; }
+                .info-box { background: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+                .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+                .info-row:last-child { margin-bottom: 0; font-weight: bold; font-size: 18px; padding-top: 10px; border-top: 2px solid #dee2e6; }
+                .label { color: #666; }
+                .value { color: #333; font-weight: 500; }
+                .test-mode-banner { background: #fff3cd; border: 1px solid #ffc107; color: #856404; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+                .test-mode-banner strong { display: block; margin-bottom: 5px; }
+                .payment-methods { margin: 20px 0; }
+                .payment-method { background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 8px; padding: 15px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s; }
+                .payment-method:hover { border-color: #157ed2; background: #f0f8ff; }
+                .payment-method.selected { border-color: #157ed2; background: #e7f3ff; }
+                .payment-method input[type="radio"] { margin-right: 10px; }
+                .payment-method label { cursor: pointer; display: flex; align-items: center; font-weight: 500; }
+                .btn { display: block; width: 100%; padding: 15px; background: #157ed2; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+                .btn:hover { background: #0f5a9c; }
+                .btn:disabled { background: #ccc; cursor: not-allowed; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>🔒 Demo Payment Interface</h1>
+                    <p>No Login Required - Test Mode</p>
+                </div>
+                <div class="content">
+                    <div class="test-mode-banner">
+                        <strong>⚠️ TEST MODE ENABLED</strong>
+                        This is a demo payment interface for testing. No real payment will be processed.
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-row">
+                            <span class="label">Order Number:</span>
+                            <span class="value">#<?php echo $order->get_order_number(); ?></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Customer:</span>
+                            <span class="value"><?php echo esc_html($order->get_billing_first_name() . ' ' . $order->get_billing_last_name()); ?></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Email:</span>
+                            <span class="value"><?php echo esc_html($order->get_billing_email()); ?></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Order Total:</span>
+                            <span class="value"><?php echo $order->get_formatted_order_total(); ?></span>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 15px;">Select Payment Method:</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="selectMethod(this, 'card')">
+                            <label><input type="radio" name="payment_method" value="card" checked> 💳 Credit/Debit Card</label>
+                        </div>
+                        <div class="payment-method" onclick="selectMethod(this, 'blik')">
+                            <label><input type="radio" name="payment_method" value="blik"> 🇵🇱 BLIK (Poland)</label>
+                        </div>
+                        <div class="payment-method" onclick="selectMethod(this, 'ideal')">
+                            <label><input type="radio" name="payment_method" value="ideal"> 🇳🇱 iDEAL (Netherlands)</label>
+                        </div>
+                        <div class="payment-method" onclick="selectMethod(this, 'paypal')">
+                            <label><input type="radio" name="payment_method" value="paypal"> 💰 PayPal</label>
+                        </div>
+                        <div class="payment-method" onclick="selectMethod(this, 'crypto')">
+                            <label><input type="radio" name="payment_method" value="crypto"> ₿ Cryptocurrency</label>
+                        </div>
+                    </div>
+
+                    <button class="btn" onclick="processPayment()">
+                        Complete Demo Payment
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                function selectMethod(element, method) {
+                    document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+                    element.classList.add('selected');
+                    element.querySelector('input').checked = true;
+                }
+
+                function processPayment() {
+                    const btn = event.target;
+                    const method = document.querySelector('input[name="payment_method"]:checked').value;
+
+                    btn.disabled = true;
+                    btn.textContent = 'Processing...';
+
+                    // Simulate payment processing
+                    setTimeout(() => {
+                        // Complete the order
+                        window.location.href = '<?php echo esc_url($order->get_checkout_order_received_url()); ?>';
+                    }, 2000);
+                }
+            </script>
+        </body>
+        </html>
+        <?php
+        exit;
+    });
 }
 
 ?>

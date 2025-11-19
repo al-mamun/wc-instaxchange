@@ -775,16 +775,27 @@ class WC_InstaxChange_Gateway extends WC_Payment_Gateway
                 // Allow demo mode in development/test environments or when test mode is enabled
                 wc_instaxchange_debug_log('Creating demo session for testing', ['test_mode_enabled' => $allow_demo_mode]);
 
-                // Create demo session for testing in non-production only
+                // Create demo session for testing - use internal demo page instead of InstaxChange iframe
                 $demo_session_id = 'demo_' . $order->get_id() . '_' . time();
+
+                // Use custom demo payment page that doesn't require login
+                $demo_payment_url = add_query_arg(
+                    array(
+                        'wc-api' => 'wc_instaxchange_demo_payment',
+                        'order_id' => $order->get_id(),
+                        'session_id' => $demo_session_id
+                    ),
+                    home_url('/')
+                );
 
                 return array(
                     'session_id' => $demo_session_id,
-                    'iframe_url' => 'https://instaxchange.com/embed/' . $demo_session_id,
-                    'payment_url' => 'https://instaxchange.com/pay/' . $demo_session_id,
+                    'iframe_url' => $demo_payment_url, // Use custom demo page instead of InstaxChange
+                    'payment_url' => $demo_payment_url,
                     'payment_data' => $payment_data,
                     'demo_mode' => true,
-                    'api_error' => 'HTTP ' . $response_code . ': ' . $response_body
+                    'api_error' => 'HTTP ' . $response_code . ': ' . $response_body,
+                    'message' => 'Test mode enabled - using demo payment interface'
                 );
             }
 
