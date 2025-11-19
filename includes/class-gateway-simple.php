@@ -755,8 +755,11 @@ class WC_InstaxChange_Gateway extends WC_Payment_Gateway
                     throw new Exception('Payment method not supported. Please use credit card payment.');
                 }
 
-                // In production, fail immediately - no demo mode
-                if (defined('WC_INSTAXCHANGE_PRODUCTION') && WC_INSTAXCHANGE_PRODUCTION) {
+                // Check if test mode is enabled in settings to allow demo mode
+                $allow_demo_mode = ($this->testmode === 'yes');
+
+                // In production with test mode disabled, fail immediately - no demo mode
+                if (defined('WC_INSTAXCHANGE_PRODUCTION') && WC_INSTAXCHANGE_PRODUCTION && !$allow_demo_mode) {
                     // Log critical error for admin notification
                     wc_instaxchange_log('CRITICAL: Payment gateway API unavailable in production', [
                         'order_id' => $order->get_id(),
@@ -769,8 +772,8 @@ class WC_InstaxChange_Gateway extends WC_Payment_Gateway
                     throw new Exception('Payment gateway temporarily unavailable. Please try again later or contact support.');
                 }
 
-                // Only allow demo mode in development/test environments
-                wc_instaxchange_debug_log('Creating demo session for testing (development mode only)');
+                // Allow demo mode in development/test environments or when test mode is enabled
+                wc_instaxchange_debug_log('Creating demo session for testing', ['test_mode_enabled' => $allow_demo_mode]);
 
                 // Create demo session for testing in non-production only
                 $demo_session_id = 'demo_' . $order->get_id() . '_' . time();
